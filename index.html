@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda Escolar</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Minha Agenda Escolar</h1>
+        
+        <!-- Secção do Horário -->
+        <div class="secao">
+            <h2>🗓️ Horário Semanal</h2>
+            
+            <div class="adicionar-aula">
+                <select id="diaSemana">
+                    <option value="">Escolhe o dia</option>
+                    <option value="Segunda">Segunda-feira</option>
+                    <option value="Terça">Terça-feira</option>
+                    <option value="Quarta">Quarta-feira</option>
+                    <option value="Quinta">Quinta-feira</option>
+                    <option value="Sexta">Sexta-feira</option>
+                </select>
+                
+                <input type="text" id="disciplina" placeholder="Nome da disciplina">
+                <input type="time" id="horaAula" placeholder="Hora">
+                
+                <button onclick="adicionarAula()">Adicionar Aula</button>
+            </div>
+            
+            <div id="horario">
+                <p>Adiciona as tuas aulas acima</p>
+            </div>
+        </div>
+
+        <!-- Secção de Testes e Trabalhos -->
+        <div class="secao">
+            <h2>📝 Testes e Trabalhos</h2>
+            <div class="adicionar-tarefa">
+                <input type="text" id="nomeTarefa" placeholder="Nome do teste/trabalho">
+                <input type="date" id="dataTarefa">
+                <button onclick="adicionarTarefa()">Adicionar</button>
+            </div>
+            <div id="listaTarefas"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
