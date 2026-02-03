@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testes e Trabalhos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Menu de Navegação -->
+        <nav class="navbar">
+            <a href="index.html" class="navbar-brand">📚 Agenda Escolar</a>
+            <div class="navbar-links">
+                <a href="index.html">Home</a>
+                <a href="horario.html">Horário</a>
+                <a href="testes.html" class="active">Testes</a>
+            </div>
+        </nav>
+
+        <!-- Conteúdo da Página -->
+        <h1>📝 Testes e Trabalhos</h1>
+        
+        <div class="secao">
+            <h2>Marcar Novo Teste</h2>
+            <div class="adicionar-tarefa">
+                <input type="text" id="nomeTarefa" placeholder="Nome do teste/trabalho">
+                <input type="date" id="dataTarefa">
+                <button onclick="adicionarTarefa()">Adicionar</button>
+            </div>
+        </div>
+
+        <div class="secao">
+            <h2>Meus Testes</h2>
+            <div id="listaTarefas">
+                <p class="mensagem-vazio">Ainda não tens testes marcados.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script-testes.js"></script>
+</body>
+</html>

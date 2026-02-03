@@ -1,30 +1,3 @@
-// Função para adicionar uma tarefa
-function adicionarTarefa() {
-    // Buscar os valores que o utilizador escreveu
-    let nome = document.getElementById('nomeTarefa').value;
-    let data = document.getElementById('dataTarefa').value;
-    
-    // Verificar se preencheu tudo
-    if (nome === '' || data === '') {
-        alert('Por favor, preenche todos os campos!');
-        return;
-    }
-    
-    // Buscar onde vamos mostrar as tarefas
-    let lista = document.getElementById('listaTarefas');
-    
-    // Criar uma nova tarefa
-    let novaTarefa = document.createElement('div');
-    novaTarefa.innerHTML = nome + ' - ' + data;
-    
-    // Adicionar à lista
-    lista.appendChild(novaTarefa);
-    
-    // Limpar os campos
-    document.getElementById('nomeTarefa').value = '';
-    document.getElementById('dataTarefa').value = '';
-}
-
 // Função para adicionar aulas ao horário
 function adicionarAula() {
     // Buscar os valores que o utilizador escolheu
@@ -38,18 +11,78 @@ function adicionarAula() {
         return;
     }
     
-    // Buscar onde vamos mostrar o horário
-    let horario = document.getElementById('horario');
+    // Criar objeto da aula
+    let aula = {
+        id: Date.now(),
+        dia: dia,
+        disciplina: disciplina,
+        hora: hora
+    };
     
-    // Criar uma nova aula
-    let novaAula = document.createElement('div');
-    novaAula.innerHTML = dia + ' - ' + hora + ' - ' + disciplina;
+    // Buscar aulas existentes do LocalStorage
+    let aulas = JSON.parse(localStorage.getItem('aulas')) || [];
     
-    // Adicionar ao horário
-    horario.appendChild(novaAula);
+    // Adicionar a nova aula
+    aulas.push(aula);
+    
+    // Guardar no LocalStorage
+    localStorage.setItem('aulas', JSON.stringify(aulas));
     
     // Limpar os campos
     document.getElementById('diaSemana').value = '';
     document.getElementById('disciplina').value = '';
     document.getElementById('horaAula').value = '';
+    
+    // Atualizar a lista
+    mostrarAulas();
 }
+
+// Função para mostrar as aulas
+function mostrarAulas() {
+    let aulas = JSON.parse(localStorage.getItem('aulas')) || [];
+    let lista = document.getElementById('listaAulas');
+    
+    // Se não houver aulas
+    if (aulas.length === 0) {
+        lista.innerHTML = '<p class="mensagem-vazio">Ainda não tens aulas adicionadas.</p>';
+        return;
+    }
+    
+    // Limpar a lista
+    lista.innerHTML = '';
+    
+    // Ordenar por dia e hora
+    aulas.sort((a, b) => {
+        const dias = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'];
+        if (dias.indexOf(a.dia) !== dias.indexOf(b.dia)) {
+            return dias.indexOf(a.dia) - dias.indexOf(b.dia);
+        }
+        return a.hora.localeCompare(b.hora);
+    });
+    
+    // Mostrar cada aula
+    aulas.forEach(aula => {
+        let item = document.createElement('div');
+        item.className = 'item';
+        item.innerHTML = `
+            <div class="item-info">
+                <strong>${aula.dia}</strong> - ${aula.hora} - ${aula.disciplina}
+            </div>
+            <button class="btn-apagar" onclick="apagarAula(${aula.id})">Apagar</button>
+        `;
+        lista.appendChild(item);
+    });
+}
+
+// Função para apagar uma aula
+function apagarAula(id) {
+    let aulas = JSON.parse(localStorage.getItem('aulas')) || [];
+    aulas = aulas.filter(aula => aula.id !== id);
+    localStorage.setItem('aulas', JSON.stringify(aulas));
+    mostrarAulas();
+}
+
+// Carregar as aulas quando a página abre
+window.onload = function() {
+    mostrarAulas();
+};
