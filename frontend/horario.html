@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horário Semanal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Menu de Navegação -->
+        <nav class="navbar">
+            <a href="index.html" class="navbar-brand">📚 Agenda Escolar</a>
+            <div class="navbar-links">
+                <a href="index.html">Home</a>
+                <a href="horario.html" class="active">Horário</a>
+                <a href="testes.html">Testes</a>
+            </div>
+        </nav>
+
+        <!-- Conteúdo da Página -->
+        <h1>🗓️ Horário Semanal</h1>
+        
+        <div class="secao">
+            <h2>Adicionar Nova Aula</h2>
+            <div class="adicionar-aula">
+                <select id="diaSemana">
+                    <option value="">Escolhe o dia</option>
+                    <option value="Segunda">Segunda-feira</option>
+                    <option value="Terça">Terça-feira</option>
+                    <option value="Quarta">Quarta-feira</option>
+                    <option value="Quinta">Quinta-feira</option>
+                    <option value="Sexta">Sexta-feira</option>
+                </select>
+                
+                <input type="text" id="disciplina" placeholder="Nome da disciplina">
+                <input type="time" id="horaAula">
+                
+                <button onclick="adicionarAula()">Adicionar Aula</button>
+            </div>
+        </div>
+
+        <div class="secao">
+            <h2>Minhas Aulas</h2>
+            <div id="listaAulas">
+                <p class="mensagem-vazio">Ainda não tens aulas adicionadas.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
